@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/reporte-agenda/css/reporte_agenda.css">
+    <link rel="stylesheet" href="/css/registro.css">
+    <link rel="stylesheet" href="/reporte-agenda/css/reporte_agenda.css">
+    <!-- Inicion Libreria datatable -->
+    <link rel="stylesheet" href="/reporte-agenda/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/reporte-agenda/css/datatables.min.css">
+    <!-- Final -->
+    <script src="https://kit.fontawesome.com/95789fc486.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Empleados</title>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo"><img src="/img/dashboardA/estetoscopio.webp" alt="logo"></div>
+        <ul class="menu">
+
+            <li>
+                <a href="/dashboardA">
+                    <i class="fa-solid fa-house-user bar-t"></i>
+                    <span class="bar-t">Inicio</span>
+                </a>
+            </li>
+
+            <li class="list__item">
+                <div class="list__button list__button--click">
+                    <i class="fas fa-user"></i>
+                    <span>Perfil</span>
+                    <i class="fa-solid fa-chevron-right list__arrow"></i>
+                </div>
+                <ul class="list__show">
+                    <li class="list__inside">
+                        <a href="/TablaEmpleado" class="nav__link nav__link--inside">Empleado</a>
+                    </li>
+                    <li class="list__inside">
+                        <a href="/TablaPaciente" class="nav__link nav__link--inside">Paciente</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="/AgendaAdmin">
+                    <i class="fa-solid fa-calendar-days bar-t"></i>
+                    <span class="bar-t">Agenda</span>
+                </a>
+            </li>
+
+            <li class="list__item">
+                <div class="list__button list__button--click">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Reporte</span>
+                    <i class="fa-solid fa-chevron-right list__arrow"></i>
+                </div>
+                <ul class="list__show">
+                    <li class="list__inside">
+                        <a href="/reporteAgenda" class="nav__link nav__link--inside">Agenda</a>
+                    </li>
+                    <li class="list__inside">
+                        <a href="/reporteEnfermeria" class="nav__link nav__link--inside"> Enfermeria</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="active_a">
+                <a href="#">
+                    <i class="fa-solid fa-hospital-user bar-t"></i>
+                    <span class="bar-t">Registro</span>
+                </a>
+            </li>
+
+            <li class="logout">
+                <a href="/logout">
+                    <i class="fas fa-sign-out-alt bar-t"></i>
+                    <span class="bar-t"> Salir</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="header--wrapper">
+            <div class="header-title">
+                <span style="color:#1d2d62;">Administrador</span>
+                <h2>
+                    <span style="color:#1d2d62; font-size: 21px; font-weight: bold;" th:text="${nombreAdmin}">
+                        Nombre y Apellido Administrador
+                    </span>
+                </h2>
+            </div>
+        </div>
+
+        <section class="faq-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 offset-md-3">
+                        <div class="faq" id="accordion">
+
+                            <div class="card" th:each="registro : ${registros}">
+                                <div class="card-header accordion">
+                                    <h4 class="faq-title">
+                                        <span class="badge">#</span> 
+                                        Solicitud
+                                    </h4>
+                                </div>
+                                <div class="panel">
+                                    <div class="card-body">
+                                        <span class="sub-icon" onclick="window.location.href='/TablaPaciente'" style="cursor: pointer;"> <i class="fa-solid fa-address-book" style="color: green;"></i> </span>
+                                        <p>
+                                            <span class="subtitle" th:text="'Nombre Paciente: ' + ${registro[0]}">Nombre Paciente:</span> 
+                                            <span class="subtitle" th:text="'Nombre Acudiente: ' + ${registro[1]}">Nombre Acudiente:</span> 
+                                            <span class="subtitle" th:text="'Teléfono: ' + ${registro[3]}">Teléfono:</span> 
+                                            <span class="subtitle" th:text="'Correo: ' + ${registro[4]}">Correo:</span> 
+                                            <span class="subtitle" th:text="'Ubicación: ' + ${registro[2]}">Ubicación:</span> 
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="/reporte-agenda/js/bootstrap.bundle.min.js"></script>
+    <script src="/reporte-agenda/js/jquery-3.6.0.min.js"></script>
+    <script src="/reporte-agenda/js/datatables.min.js"></script>
+    <script src="/reporte-agenda/js/pdfmake.min.js"></script>
+    <script src="/reporte-agenda/js/vfs_fonts.js"></script>
+    <script src="/reporte-agenda/js/custom.js"></script>
+
+    <script th:inline="javascript">
+
+        let dropdowns = document.querySelectorAll('.list__item');
+
+        dropdowns.forEach(dropdown => {
+            dropdown.addEventListener('click', () => {
+                let submenu = dropdown.querySelector('.list__show');
+                if (submenu !== null) {
+                    if (submenu.style.display === "none" || submenu.style.display === "") {
+                        submenu.style.display = "block";
+                    } else {
+                        submenu.style.display = "none";
+                    }
+                }
+            })
+        });
+
+        var acc = document.getElementsByClassName("accordion");
+        for (var i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+
+    </script>
+</body>
+
+</html>

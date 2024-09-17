@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Editar Paciente</title>
+    <link rel="stylesheet" href="/css/formulario_paciente.css">
+</head>
+
+<body>
+    <section class="container">
+        <header>Datos Básicos del Paciente</header>
+        <form id="pacienteForm" action="/EnviarPaciente" method="post" class="form">
+
+            <div class="column">
+                <div class="input-box">
+                    <label>Nombre</label>
+                    <input type="text" name="nombreP" th:value="${paciente[2]}" placeholder="Ingresa tu Nombre" pattern="^[a-zA-Z]+$"
+                        title="No se admiten espacios en blancos ni caracteres especiales" required>
+                </div>
+                <div class="input-box">
+                    <label>Apellido</label>
+                    <input type="text" name="apellidoP"  th:value="${paciente[3]}" placeholder="Ingresa tu Apellido" pattern="^[a-zA-Z]+$"
+                        title="No se admiten espacios en blancos ni caracteres especiales" required>
+                </div>
+            </div>
+            <div class="column">
+                <div class="input-box">
+                    <label>Tipo de Identificación</label>
+                    <div class="select-box">
+                        <select name="tId" required>
+                            <option hidden value="">Elige tu tipo</option>
+                            <option value="C.C" th:selected="${paciente[1] == 'C.C'}">Cedula de ciudadanía</option>
+                            <option value="T.I" th:selected="${paciente[1] == 'T.I'}">Tarjeta de Identidad</option>
+                            <option value="NIT" th:selected="${paciente[1] == 'NIT'}">NIT</option>
+                            <option value="C.E" th:selected="${paciente[1] == 'C.E'}">Cedula de Extranjería</option>
+                            <option value="Pasaporte" th:selected="${paciente[1] == 'Pasaporte'}">Pasaporte</option>
+                            <option value="R.C.N" th:selected="${paciente[1] == 'R.C.N'}">Registro Civil de Nacimiento
+                        </select>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <label>Identificación</label>
+                    <input type="number" name="identificacionP" th:value="${paciente[0]}" placeholder="Ingresa tu identificación"
+                        inputmode="numeric" required>
+                </div>
+            </div>
+            <div class="input-box">
+                <label>Dirección</label>
+                <input type="text" name="direccionP" th:value="${paciente[4]}" placeholder="Ingresa tu dirección" required>
+            </div>
+            <div class="gender-box">
+                <h3>Sexo</h3>
+                <div class="gender-option">
+                    <div class="gender">
+                        <input type="radio" id="check-male" name="sexo" th:checked="${paciente[6] == 'Masculino'}" value="Masculino">
+                        <label for="check-male">Masculino</label>
+                    </div>
+                    <div class="gender">
+                        <input type="radio" id="check-female" name="sexo" th:checked="${paciente[6] == 'Femenino'}" value="Femenino">
+                        <label for="check-female">Femenino</label>
+                    </div>
+                    <div class="gender">
+                        <input type="radio" id="check-intersexual" name="sexo" th:checked="${paciente[6] == 'Intersexual'}" value="Intersexual">
+                        <label for="check-intersexual">Intersexual</label>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="column">
+                <div class="input-box">
+                    <label>Edad</label>
+                    <input type="number" id="edad" name="edad" th:value="${paciente[7]}" placeholder="Ingresa tu edad" inputmode="numeric"
+                        pattern="[0-120]*" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Fecha de nacimiento</span>
+                    <input type="date" id="fNac" name="fNac" th:value="${paciente[8]}" placeholder="Ingresa tu fecha" required min="1904-01-01">
+                </div>
+            </div>
+            <button type="submit">Actualizar</button>
+        </form>
+        <br>
+        <div class="steps">
+            <div class="step active"></div>
+            <div class="step"></div>
+            <div class="step"></div>        
+        </div>
+    </section>
+    
+    <script th:inline="javascript">
+        document.getElementById('pacienteForm').addEventListener('submit', function (event) {
+            var edadInput = document.getElementById('edad');
+            var fechaNacimientoInput = document.getElementById('fNac');
+            var edad = parseInt(edadInput.value, 10);
+            var fechaNacimiento = new Date(fechaNacimientoInput.value);
+            var hoy = new Date();
+            var edadCalculada = hoy.getFullYear() - fechaNacimiento.getFullYear();
+            var diferenciaMeses = hoy.getMonth() - fechaNacimiento.getMonth();
+
+            if (diferenciaMeses < 0 || (diferenciaMeses === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+                edadCalculada--;
+            }
+
+            if (edad !== edadCalculada || edad > 120) {
+                event.preventDefault();
+                alert('La edad ingresada no es válida o no coincide con la fecha de nacimiento.');
+            }
+        });
+    </script>
+</body>
+
+</html>

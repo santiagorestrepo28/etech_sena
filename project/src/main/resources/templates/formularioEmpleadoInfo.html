@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Datos del Empleado</title>
+    <link rel="stylesheet" href="/css/formularioEmpleado.css">
+</head>
+
+<body>
+    <section class="container">
+        <header>Información del Empleado</header>
+
+        <form id="form" action="/TablaEmpleado" class="form">
+            <div class="column">
+                <div class="input-box">
+                    <label>Nombre</label>
+                    <input type="text" name="nombreE" th:value="${empleado.nombreE}" placeholder="Nombre Empleado" readonly>
+                </div>
+
+                <div class="input-box">
+                    <label>Apellido</label>
+                    <input type="text" name="apellidoE" th:value="${empleado.apellidoE}" placeholder="Apellido Empleado" readonly>
+                </div>
+            </div>
+
+            <div class="column">
+
+                <div class="input-box">
+                    <label>Número Telefonico</label>
+                    <input type="text" name="TelefonoE" th:value="${empleado.telefonoE}" placeholder="Número de Empleado" readonly>
+                </div>
+
+                <div class="input-box">
+                    <label>Correo Electronico</label>
+                    <input type="email" name="emailE" th:value="${empleado.emailE}" placeholder="Email Empleado" readonly>
+                </div>
+
+            </div>
+
+            <div class="column">
+
+                <div class="input-box">
+                    <label>Dirección</label>
+                    <input type="text" th:value="${empleado.direccionE}" placeholder="Direccion Empleado" readonly>
+                </div>
+
+                <div class="input-box">
+                    <label>Grupo Sanguíneo</label>
+                    <div class="select-box">
+                        <select name="rhE" disabled>
+                            <option hidden value="">Rh Empleado</option>
+                            <option value="A+" th:selected="${empleado.rhE == 'A+'}">A+</option>
+                            <option value="O+" th:selected="${empleado.rhE == 'O+'}">O+</option>
+                            <option value="B+" th:selected="${empleado.rhE == 'B+'}">B+</option>
+                            <option value="AB+" th:selected="${empleado.rhE == 'AB+'}">AB+</option>
+                            <option value="A-" th:selected="${empleado.rhE == 'A-'}">A-</option>
+                            <option value="O-" th:selected="${empleado.rhE == 'O-'}">O-</option>
+                            <option value="B-" th:selected="${empleado.rhE == 'B-'}">B-</option>
+                            <option value="AB-" th:selected="${empleado.rhE == 'AB-'}">AB-</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="column">
+                <div class="input-box">
+                    <label>Contraseña</label>
+                    <input type="text" name="passwordE" th:value="${empleado.passwordE}" placeholder="Contraseña Empleado" readonly>
+                </div>
+            </div>
+
+            <button type="submit">Volver</button>
+        
+        </form>
+    </section>
+</body>
+
+</html>

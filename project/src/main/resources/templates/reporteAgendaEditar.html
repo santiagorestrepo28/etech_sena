@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Editar Agenda</title>
+    <link rel="stylesheet" href="/reporte-agenda/css/reporte_editar.css">
+</head>
+<body>
+    <section class="container">
+        <header>Editar Agendamiento</header>
+
+        <form id="form" action="/actualizarReporte" method="post" class="form">
+
+            <input hidden type="text" name="idAgenda" th:value="${idAgenda}">
+            <input hidden type="datetime-local" name="diario" th:value="${diario}">
+
+            <div class="column">
+                <div class="input-box">
+                    <label>Servicio</label>
+                    <input type="text" name="Servicio" th:value="${TpoServicio}" required readonly>
+                </div>
+
+                <div class="input-box">
+                    <label>Turno</label>
+                    <input type="text" name="Turno" th:value="${TpoTurno}" required readonly>
+                </div>
+            </div>
+
+            <div class="column">
+
+                <div class="input-box">
+                    <label>Paciente</label>
+                    <input type="text" name="Paciente" th:value="${nombrePaciente}" required readonly>
+                </div>
+
+                <div class="input-box">
+                    <label>Empleado</label>
+                    <input type="text" name="Empleado" th:value="${nombreEmpleado}" required readonly>
+                </div>
+
+            </div>
+
+            <div class="column">
+
+                <div class="input-box">
+                    <label>Fecha Inicio</label>
+                    <input type="datetime-local" placeholder="Ingresa la fecha de inicio" name="inicioFH" th:value="${inicioFH}" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Fecha Fin</label>
+                    <input type="datetime-local" placeholder="Ingresa la fecha de fin" name="finFH" th:value="${finFH}" required>
+                </div>
+
+            </div>
+
+            <button type="submit">Guardar</button>
+            
+        </form>
+    </section>
+</body>
+
+</html>

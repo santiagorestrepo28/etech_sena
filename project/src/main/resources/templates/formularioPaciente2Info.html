@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Informacion Paciente</title>
+    <link rel="stylesheet" href="/css/formulario_paciente2.css">
+</head>
+
+<body>
+    <section class="container">
+        <header>Historia Medica del Paciente</header>
+
+        <form class="form">
+
+            <div class="column">
+                <div class="input-box">
+                    <label>EPS</label>
+                    <div class="select-box">
+                        <select name="idEps" disabled>
+                            <option hidden value="">Selecciona tu eps</option>
+                            <option value="1" th:selected="${paciente[19] == 'Coosalud'}">Coosalud</option>
+                            <option value="2" th:selected="${paciente[19] == 'Nueva EPS'}">Nueva EPS</option>
+                            <option value="3" th:selected="${paciente[19] == 'Mutual Ser'}">Mutual Ser</option>
+                            <option value="4" th:selected="${paciente[19] == 'Aliansalud EPS'}">Aliansalud EPS</option>
+                            <option value="5" th:selected="${paciente[19] == 'Salud Total'}">Salud Total</option>
+                            <option value="6" th:selected="${paciente[19] == 'EPS Sanitas'}">EPS Sanitas</option>
+                            <option value="7" th:selected="${paciente[19] == 'EPS SURA'}">EPS SURA</option>
+                            <option value="8" th:selected="${paciente[19] == 'Famisanar'}">Famisanar</option>
+                            <option value="9" th:selected="${paciente[19] == 'Salud Mia'}">Salud Mia</option>
+                            <option value="10" th:selected="${paciente[19] == 'Compensar'}">Compensar</option>
+                            <option value="11" th:selected="${paciente[19] == 'Asmet Salud'}">Asmet Salud</option>
+                            <option value="12" th:selected="${paciente[19] == 'Capital Salud EPS'}">Capital Salud EPS</option>
+                            <option value="13" th:selected="${paciente[19] == 'Salud Bolivar EPS'}">Salud Bolivar EPS</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-box">
+                    <label>Grupo Sanguíneo</label>
+                    <div class="select-box">
+                        <select name="rhP" disabled>
+                            <option hidden value="">Elige tu grupo</option>
+                            <option value="A+" th:selected="${paciente[5] == 'A+'}">A+</option>
+                            <option value="O+" th:selected="${paciente[5] == 'O+'}">O+</option>
+                            <option value="B+" th:selected="${paciente[5] == 'B+'}">B+</option>
+                            <option value="AB+" th:selected="${paciente[5] == 'AB+'}">AB+</option>
+                            <option value="A-" th:selected="${paciente[5] == 'A-'}">A-</option>
+                            <option value="O-" th:selected="${paciente[5] == 'O-'}">O-</option>
+                            <option value="B-" th:selected="${paciente[5] == 'B-'}">B-</option>
+                            <option value="AB-" th:selected="${paciente[5] == 'AB-'}">AB-</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="input-box">
+                    <label>Pañal</label>
+                    <div class="select-box">
+                        <select name="panal" disabled>
+                            <option hidden value="">Opciones</option>
+                            <option value="Si" th:selected="${paciente[14] == 'Si'}">Si</option>
+                            <option value="No" th:selected="${paciente[14] == 'No'}">No</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-box">
+                    <label>Marcapaso</label>
+                    <div class="select-box">
+                        <select name="marcaPasos" disabled>
+                            <option hidden value="">Opciones</option>
+                            <option value="Si" th:selected="${paciente[16] == 'Si'}">Si</option>
+                            <option value="No" th:selected="${paciente[16] == 'No'}">No</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-box">
+                    <label>Audifonos</label>
+                    <div class="select-box">
+                        <select name="audifonos" disabled>
+                            <option hidden value="">Opciones</option>
+                            <option value="Si" th:selected="${paciente[15] == 'Si'}">Si</option>
+                            <option value="No" th:selected="${paciente[15] == 'No'}">No</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-box">
+                    <label>Protesis Dental</label>
+                    <div class="select-box">
+                        <select name="protesisDental" disabled>
+                            <option hidden value="">Opciones</option>
+                            <option value="Si" th:selected="${paciente[17] == 'Si'}">Si</option>
+                            <option value="No" th:selected="${paciente[17] == 'No'}">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-box">
+                <label>Alergia</label>
+                <input type="text" name="alergia" th:value="${paciente[9]}" readonly>
+            </div>
+
+            <div class="column">
+                <div class="input-box">
+                    <label>Nivel de dependencia</label>
+                    <div class="select-box">
+                        <select name="nivelAutonomia" disabled>
+                            <option hidden value="">Elige una opción</option>
+                            <option value="Completa" th:selected="${paciente[12] == 'Completa'}">Completa</option>
+                            <option value="Limitada" th:selected="${paciente[12] == 'Limitada'}">Limitada</option>
+                            <option value="Nula" th:selected="${paciente[12] == 'Nula'}">Nula</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-box">
+                    <label>Dependencia al comer</label>
+                    <div class="select-box">
+                        <select name="nivelAlimentacion" disabled>
+                            <option hidden value="">Elige una opción</option>
+                            <option value="Independiente" th:selected="${paciente[10] == 'Independiente'}">Independiente</option>
+                            <option value="Necesito ayuda" th:selected="${paciente[10] == 'Necesito ayuda'}">Necesitoayuda</option>
+                            <option value="Dependiente" th:selected="${paciente[10] == 'Dependiente'}">Dependiente</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-box">
+                    <label>Dependencia al baño</label>
+                    <div class="select-box">
+                        <select name="nivelBano" disabled>
+                            <option hidden value="">Elige una opción</option>
+                            <option value="Independiente" th:selected="${paciente[11] == 'Independiente'}">Independiente</option>
+                            <option value="Necesito ayuda" th:selected="${paciente[11] == 'Necesito ayuda'}">Necesito ayuda</option>
+                            <option value="Dependiente" th:selected="${paciente[11] == 'Dependiente'}">Dependiente</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column" style="display: flex; justify-content: center; align-items: center;">
+                <div class="input-box-med">
+                    <br>
+                    <label>Antecedentes médicos</label>
+                    <input type="button" name="antMed" value="Descargar" onclick="descargarPdf()">
+                </div>
+            </div>
+
+        </form>
+
+        &nbsp;&nbsp;
+
+        <div class="steps">
+            <div class="step" onclick="redireccionarVista('vista1');" style="cursor: pointer;"></div>
+            <div class="step active"></div>
+            <div class="step" onclick="redireccionarVista('acudiente');" style="cursor: pointer;"></div>
+        </div>
+
+        <script th:inline="javascript">
+            function redireccionarVista(vista) {
+                window.location.href = '/InfoPaciente?vista=' + vista;
+            }
+
+            function descargarPdf() {
+                window.location.href = '/descargarPdfPaciente';
+            }
+        </script>
+
+
+    </section>
+</body>
+
+</html>

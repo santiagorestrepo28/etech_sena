@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Informacion Acudiente</title>
+    <link rel="stylesheet" href="/css/formulario_acudiente.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <section class="container">
+        <header>Acudiente</header>
+        <form id="formAcudiente" class="form">            
+            
+            <div class="column">
+                <div class="input-box">
+                    <label>Nombre Completo</label>
+                    <input type="text" th:value="${paciente[22]}" name="nombreA" readonly>
+                </div>
+
+                <div class="input-box">
+                    <label>Apellido completo</label>
+                    <input type="text" th:value="${paciente[23]}" name="apellidoA" readonly>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="input-box">
+                    <label>Identificación</label>
+                    <input type="number" th:value="${paciente[21]}"  name="identificacionC" readonly>
+                </div>
+
+                <div class="input-box">
+                    <label>Teléfono</label>
+                    <input  type="text" th:value="${paciente[24]}" name="telefonoA" readonly>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="input-box">
+                    <label>Email</label>
+                    <input type="email" th:value="${paciente[25]}" name="correoA" readonly>
+                </div>
+            </div>
+
+            <div class="input-box">
+                <div class="input-box">
+                    <label>Dirección</label>
+                    <input type="text" th:value="${paciente[27]}" name="direccionA" readonly>
+                </div>
+
+                <div class="column">
+                    <div class="input-box">
+                        <label>Ciudad</label>
+                        <div class="select-box">
+                            <select id="lugar" name="ciudadA" disabled>
+                                <option hidden value="">Ciudad</option>
+                                <option value="Bogotá" th:selected="${paciente[26] == 'Bogotá'}">Bogotá</option>
+                                <option value="Medellín" th:selected="${paciente[26] == 'Medellín'}">Medellín</option>
+                                <option value="Barranquilla" th:selected="${paciente[26] == 'Barranquilla'}">Barranquilla</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-box">
+                        <label>Parentesco</label>
+                        <div class="select-box">
+                            <select id="parentesco" name="parentesco" disabled>
+                                <option hidden value="">Parentesco</option>
+                                <option value="100" th:selected="${paciente[20] == 'Madre'}">Madre</option>
+                                <option value="101" th:selected="${paciente[20] == 'Padre'}">Padre</option>
+                                <option value="102" th:selected="${paciente[20] == 'Hermano/a'}">Hermano/a</option>
+                                <option value="103" th:selected="${paciente[20] == 'Abuelo/a'}">Abuelo/a</option>
+                                <option value="104" th:selected="${paciente[20] == 'Cónyuge'}">Cónyuge</option>
+                                <option value="105" th:selected="${paciente[20] == 'Hijo/a'}">Hijo/a</option>
+                                <option value="106" th:selected="${paciente[20] == 'Tío/a'}">Tío/a</option>
+                            </select>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </form>
+
+        &nbsp;&nbsp;
+
+        <div class="steps">
+            <div class="step" onclick="redireccionarVista('vista1');" style="cursor: pointer;"></div>
+            <div class="step" onclick="redireccionarVista('vista2');" style="cursor: pointer;"></div>
+            <div class="step active"></div>
+        </div>
+
+
+        <script th:inline="javascript">
+            function redireccionarVista(vista) {
+                window.location.href = '/InfoPaciente?vista=' + vista;
+            }
+        </script>
+
+    </section>
+</body>
+</html>

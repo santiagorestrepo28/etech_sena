@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Informacion Paciente</title>
+    <link rel="stylesheet" href="/css/formulario_paciente.css">
+</head>
+
+<body>
+    <section class="container">
+        <header>Datos Básicos del Paciente</header>
+
+        <form id="form" action="/TablaPaciente" class="form">
+            <div class="column">
+                <div class="input-box">
+                    <label>Nombre</label>
+                    <input type="text" name="nombreP" th:value="${paciente[2]}" readonly>
+                </div>
+
+                <div class="input-box">
+                    <label>Apellido</label>
+                    <input type="text" name="apellidoP" th:value="${paciente[3]}" readonly>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="input-box">
+                    <label>Tipo de Identificación</label>
+                    <div class="select-box">
+                        <select name="tId" disabled>
+                            <option hidden value="">Elige tu tipo</option>
+                            <option value="C.C" th:selected="${paciente[1] == 'C.C'}">Cedula de ciudadanía</option>
+                            <option value="T.I" th:selected="${paciente[1] == 'T.I'}">Tarjeta de Identidad</option>
+                            <option value="NIT" th:selected="${paciente[1] == 'NIT'}">NIT</option>
+                            <option value="C.E" th:selected="${paciente[1] == 'C.E'}">Cedula de Extranjería</option>
+                            <option value="Pasaporte" th:selected="${paciente[1] == 'Pasaporte'}">Pasaporte</option>
+                            <option value="R.C.N" th:selected="${paciente[1] == 'R.C.N'}">Registro Civil de Nacimiento
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-box">
+                    <label>Identificación</label>
+                    <input type="number" name="identificacionP" th:value="${paciente[0]}" readonly>
+                </div>
+            </div>
+
+            <div class="column">
+
+                <div class="input-box">
+                    <label>Direccion</label>
+                    <input type="text" th:value="${paciente[4]}" readonly>
+                </div>
+            </div>
+
+            <div class="gender-box">
+                <h3>Sexo</h3>
+                <div class="gender-option">
+                    <div class="gender">
+                        <input type="radio" id="check-male" name="gender" th:checked="${paciente[6] == 'Masculino'}"
+                            disabled>
+                        <label for="check-male">Masculino</label>
+                    </div>
+                    <div class="gender">
+                        <input type="radio" id="check-female" name="gender" th:checked="${paciente[6] == 'Femenino'}"
+                            disabled>
+                        <label for="check-female">Femenino</label>
+                    </div>
+                    <div class="gender">
+                        <input type="radio" id="check-intersexual" name="gender" th:checked="${paciente[6] == 'I'}"
+                            disabled>
+                        <label for="check-intersexual">Intersexual</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="input-box">
+                    <label>Edad</label>
+                    <input type="number" name="edad" th:value="${paciente[7]}" readonly>
+                </div>
+
+                <div class="input-box">
+                    <span class="details">Fecha de nacimiento</span>
+                    <input type="date" name="fNac" th:value="${paciente[8]}" readonly>
+                </div>
+            </div>
+
+            <button type="submit">Volver</button>
+
+        </form>
+
+        &nbsp;&nbsp;
+
+
+        <div class="steps">
+            <div class="step active"></div>
+            <div class="step" onclick="redireccionarVista('vista2');" style="cursor: pointer;"></div>
+            <div class="step" onclick="redireccionarVista('acudiente');" style="cursor: pointer;"></div>
+        </div>
+
+        <script th:inline="javascript">
+            function redireccionarVista(vista) {
+                window.location.href = '/InfoPaciente?vista=' + vista;
+            }
+        </script>
+
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Nuevo Empleado</title>
+    <link rel="stylesheet" href="/css/formularioEmpleado.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <section class="container">
+
+        <header>Registro de Nuevo Empleado</header>
+
+        <form id="form" action="/crearEmpleado" method="post" class="form">
+
+            <input type="number" name="idRolE" value="2" hidden required>
+
+            <div class="input-box">
+                <label>Identificación</label>
+                <input type="number" name="identificacionE" placeholder="Ingresa tu identificación" inputmode="numeric"
+                    required>
+            </div>
+
+            <div class="column">
+                <div class="input-box">
+                    <label>Nombre</label>
+                    <input type="text" name="nombreE" placeholder="Nombre Empleado" pattern="^[a-zA-Z]+$"
+                        title="No se admiten espacios en blancos ni caracteres especiales" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Apellido</label>
+                    <input type="text" name="apellidoE" placeholder="Apellido Empleado" pattern="^[a-zA-Z]+$"
+                        title="No se admiten espacios en blancos ni caracteres especiales" required>
+                </div>
+            </div>
+
+            <div class="column">
+
+                <div class="input-box">
+                    <label>Número Telefonico</label>
+                    <input type="text" name="TelefonoE" placeholder="Número de Empleado" inputmode="numeric"
+                        pattern="[0-9]{10}" title="Por favor, ingresa un número de teléfono de 10 dígitos" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Correo Electronico</label>
+                    <input type="email" name="emailE" placeholder="Email Empleado" required>
+                </div>
+
+            </div>
+
+            <div class="column">
+
+                <div class="input-box">
+                    <label>Dirección</label>
+                    <input type="text" name="direccionE" placeholder="Direccion Empleado" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Grupo Sanguíneo</label>
+                    <div class="select-box">
+                        <select name="rhE" required>
+                            <option hidden value="">Rh Empleado</option>
+                            <option value="A+">A+</option>
+                            <option value="O+">O+</option>
+                            <option value="B+">B+</option>
+                            <option value="AB+">AB+</option>
+                            <option value="A-">A-</option>
+                            <option value="O-">O-</option>
+                            <option value="B-">B-</option>
+                            <option value="AB-">AB-</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="column">
+                <div class="input-box">
+                    <label>Contraseña</label>
+                    <input type="password" name="passwordE" placeholder="Contraseña Empleado" required
+                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{7,15}$"
+                        title="La contraseña debe contener al menos una mayúscula, una minúscula, un número y tener una longitud de 7 a 15 caracteres" />
+                </div>
+            </div>
+
+            <button type="submit">Guardar</button>
+        </form>
+    </section>
+
+    <script th:inline="javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            var errorIdentificacion = /*[[${errorIdentificacion == true}]]*/ false;
+            var errorEmail = /*[[${errorEmail == true}]]*/ false;
+            var errorTelefono = /*[[${errorTelefono == true}]]*/ false;
+    
+            if (errorIdentificacion) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'La identificación ya está registrada.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+
+            if (errorTelefono) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'El Telefono ya está registrada.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+    
+            if (errorEmail) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'El correo electrónico ya está registrado.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        });
+    </script>    
+
+</body>
+
+</html>
